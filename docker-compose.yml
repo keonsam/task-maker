@@ -1,0 +1,67 @@
+version: "3.8"
+
+services:
+
+  api:
+    build:
+      context: ./api
+      target: api-dev # only use the dev step
+    container_name: api
+    image: task-maker-api
+    init: true
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./api:/app
+    networks:
+      - task-maker
+    environment:
+       PG_CONNECTION_STRING: postgresql://postgres:password@db:5432/task-maker
+       PORT: 3000
+       NODE_ENV: development
+
+  app:
+    build:
+      context: ./app
+      target: app-dev # only use the dev step
+    container_name: app
+    image: task-maker-app
+    init: true
+    ports:
+      - "80:8080"
+    volumes:
+      - ./app:/app
+    networks:
+      - task-maker
+    environment:
+       NODE_ENV: development
+
+  db:
+    build:
+      context: ./db
+    container_name: db
+    image: task-maker-db
+    networks:
+      - task-maker
+    command: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data:delegated
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    environment:
+      - POSTGRES_PASSWORD=password
+
+networks:
+  task-maker:
+    name: task-maker
+
+volumes:
+  postgres-data:

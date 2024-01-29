@@ -4,8 +4,5 @@
 
 ## SETUP PROJECT
 
-frontend
-`cd app & npm install`
-
-backend
-`cd api & npm install`
+Setup up dev build in docker with:
+`./build-dev.sh`

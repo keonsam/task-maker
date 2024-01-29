@@ -1,0 +1,12 @@
+FROM node:21 as api-base
+
+WORKDIR /app
+
+
+# -- DEV
+FROM api-base as api-dev
+ENV NODE_ENV=development
+
+
+# Dependencies are volume mounted in the container
+ENTRYPOINT [ "./init.sh" ]
