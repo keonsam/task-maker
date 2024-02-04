@@ -56,6 +56,8 @@ export default function TaskList() {
         ...page,
         pageNumber: pageNumber - 1,
       });
+    }else if (del) {
+      updateList()
     }
   };
 
