@@ -102,22 +102,22 @@ export default function TaskItem({ onDelete, onEdit, task }: TaskItemProps) {
             </Box>
             <Box
               sx={{
-                width: "50ch",
+                width: { sm: "25ch", md: "50ch", lg: "75ch" },
                 mr: "auto",
               }}
             >
               <Typography variant="h6" component="h3" fontWeight={400} noWrap>
-                {title}{" "}
+                {title}
               </Typography>
               {/* move to collapse on mobile*/}
               <Typography
                 variant="body1"
                 color="grey.700"
                 sx={{
-                  display: { xs: "none", sm: "-webkit-box" },
+                  display: { xs: "none", sm: "none",  md: "-webkit-box" },
                   WebkitLineClamp: "2",
                   wordBreak: "break-all",
-                  maxWidth: { sm: "25ch", md: "50ch" },
+                  maxWidth: { sm: "75ch", md: "75ch" },
                   textOverflow: "ellipsis",
                   overflow: "hidden",
                   WebkitBoxOrient: "vertical",

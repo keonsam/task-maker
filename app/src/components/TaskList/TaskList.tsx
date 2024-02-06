@@ -1,4 +1,10 @@
-import { Box, Container, List, Pagination, Typography } from "@mui/material";
+import {
+  Box,
+  Container,
+  List,
+  Pagination,
+  Typography,
+} from "@mui/material";
 import NewButton from "../NewButton/NewButton";
 import { useCallback, useState } from "react";
 import TaskForm, { TaskModal } from "../TaskForm/TaskForm";
@@ -17,7 +23,7 @@ export default function TaskList() {
     pageSize: minPageSize,
     sort: "ASC",
     search: "",
-    timeline: "incoming",
+    timeline: "all",
   });
   const [showTaskModal, setShowTaskModal] = useState<TaskModal>({
     open: false,
@@ -44,7 +50,7 @@ export default function TaskList() {
 
   const handleToggleDeleteModal = (id = "", title = "", del?: boolean) => {
     const { pageNumber } = page || {};
-  
+
     setShowDeleteModal({
       id,
       open: !showDeleteModal.open,
@@ -56,8 +62,8 @@ export default function TaskList() {
         ...page,
         pageNumber: pageNumber - 1,
       });
-    }else if (del) {
-      updateList()
+    } else if (del) {
+      updateList();
     }
   };
 
@@ -76,14 +82,14 @@ export default function TaskList() {
       component="main"
       sx={{
         flexGrow: 1,
-        height: "100vh",
+        height: "calc(100vh-64px)",
         overflow: "auto",
       }}
     >
       <Container
         maxWidth="lg"
         sx={{
-          my: 4,
+          my: 2,
           flexGrow: 1,
         }}
       >
@@ -92,7 +98,7 @@ export default function TaskList() {
           onPage={handlePage}
           sort={page.sort}
           prevSearch={page.search}
-          preTimeline={page.timeline}
+          prevTimeline={page.timeline}
         />
         {items.length > 0 ? (
           <>

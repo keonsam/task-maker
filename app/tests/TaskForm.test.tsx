@@ -5,6 +5,7 @@ import TaskForm from "../src/components/TaskForm/TaskForm";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Task } from "../src/types/Task";
+import { globalContext } from "./mocks/context";
 
 const handleClose = vi.fn();
 
@@ -58,6 +59,17 @@ describe("Task Form", () => {
 
     expect(handleClose).toBeCalledTimes(1);
     expect(handleClose).toBeCalledWith(undefined, true);
+    expect(globalContext).toBeCalledTimes(1);
+    expect(globalContext).toBeCalledWith(
+      expect.objectContaining({
+        title: task.title,
+        assignee: "",
+        description: task.description,
+        notes: task.notes,
+        priorityLevel: "low",
+        status: "pending",
+      }),
+    );
   });
 
   it("update task", async () => {
@@ -72,6 +84,7 @@ describe("Task Form", () => {
 
     const title = screen.getByRole("textbox", { name: /title/i });
     const description = screen.getByRole("textbox", { name: /description/i });
+    // more difficult to test input forms
     // const dueDate = screen.getByRole("button", { name: /open/i });
     // const assignee = screen.getByRole("combobox", { name: /assignee/i });
     // const priorityLevel = screen.getByRole("combobox", {
@@ -101,5 +114,16 @@ describe("Task Form", () => {
 
     expect(handleClose).toBeCalledTimes(1);
     expect(handleClose).toBeCalledWith(undefined, true);
+    expect(globalContext).toBeCalledTimes(1);
+    expect(globalContext).toBeCalledWith(
+      expect.objectContaining({
+        title: "Task 2",
+        assignee: "1",
+        description: "A description",
+        notes: "A notes",
+        priorityLevel: "high",
+        status: "pending",
+      }),
+    );
   });
 });

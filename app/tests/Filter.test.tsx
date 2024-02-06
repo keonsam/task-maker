@@ -110,7 +110,7 @@ describe("Filter", () => {
           onPage={handlePage}
           sort="ASC"
           prevSearch="Task 1"
-          preTimeline="incoming"
+          prevTimeline="incoming"
         />,
       );
 
@@ -147,7 +147,7 @@ describe("Filter", () => {
           onPage={handlePage}
           sort="ASC"
           prevSearch="Task 1"
-          preTimeline="incoming"
+          prevTimeline="incoming"
         />,
       );
 

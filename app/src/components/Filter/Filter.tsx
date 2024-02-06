@@ -14,19 +14,19 @@ type FilterProps = {
   onPage: (page: Pagination) => void;
   sort?: Sort;
   prevSearch: string | undefined;
-  preTimeline: string | undefined;
+  prevTimeline: string | undefined;
 };
 
 export default function Filter({
   onPage,
   sort,
   prevSearch,
-  preTimeline,
+  prevTimeline,
 }: FilterProps) {
   const [search, setSearch] = useState("");
 
   const handleTimeline = (timeline: Timeline) => {
-    if (timeline !== preTimeline) {
+    if (timeline !== prevTimeline) {
       onPage({
         timeline,
       });
@@ -69,6 +69,7 @@ export default function Filter({
             ml: { xs: 1, sm: 4 },
           }}
           onChange={(e) => handleTimeline(e.target.value as Timeline)}
+          value={prevTimeline || "all"}
         >
           <MenuItem value="all">All</MenuItem>
           <MenuItem value="incoming">Incoming</MenuItem>

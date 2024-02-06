@@ -12,7 +12,7 @@ export default function useTasks(pagination: Pagination) {
   });
 
   const getList = useCallback(async () => {
-    console.log("requesting tasks");
+    console.log("useTasks: requesting list");
     setIsLoading(true);
     try {
       const res = await getTasks(pagination);
